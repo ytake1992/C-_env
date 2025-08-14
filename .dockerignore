@@ -1,0 +1,10 @@
+.git
+.gitignore
+*.md
+docs/html
+docs/latex
+analysis/cppcheck.xml
+analysis/html/
+Dockerfile
+docker-compose.yml
+bin/

@@ -1,0 +1,5 @@
+docs/html
+docs/latex
+analysis/cppcheck.xml
+analysis/html/
+bin/

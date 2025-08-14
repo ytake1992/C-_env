@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  cpp98-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - ./docs:/app/docs
+      - ./analysis:/app/analysis
+      - ./Makefile:/app/Makefile
+    working_dir: /app
+    tty: true
+    init: true
+    ports:
+      - "8000:8000" # Doxygen HTML閲覧用
+    command: cat
