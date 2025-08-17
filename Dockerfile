@@ -29,10 +29,11 @@ RUN wget https://github.com/danmar/cppcheck/archive/refs/tags/2.15.0.tar.gz \
     && tar -xzf 2.15.0.tar.gz \
     && cd cppcheck-2.15.0 \
     && mkdir build && cd build \
-    && cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. \
+    && cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DUSE_BUNDLED_TINYXML2=OFF .. \
     && make && make install \
     && mkdir -p /usr/local/share/Cppcheck/cfg \
-    && cp -r ../cfg/* /usr/local/share/Cppcheck/cfg/ \
+    && cp -rv ../cfg/* /usr/local/share/Cppcheck/cfg/ \
+    && ls -l /usr/local/share/Cppcheck/cfg/ \
     && cd ../.. && rm -rf cppcheck-2.15.0 2.15.0.tar.gz
 
 # Python依存（cppcheck-htmlreport用）
