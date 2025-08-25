@@ -25,13 +25,13 @@ $(info Test Bins: $(TEST_BINS))
 
 all: main test analysis
 
-main: $(SOURCES) $(HEADERS)
+main: $(SOURCES) $(HEA DERS)
 	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/main $(SOURCES)
 
 test: $(TEST_BINS)
 
-$(TEST_BINS): $(TEST_BIN_DIR)/%: $(TEST_DIR)/%.cc $(SRC_DIR)/calculator.cc $(SRC_DIR)/logger.cc $(SRC_DIR)/error_handler.cc $(HEADERS)
+$(TEST_BINS): $(TEST_BIN_DIR)/%: $(TEST_SOURCES) $(SOURCES) $(HEADERS)
 	@mkdir -p $(TEST_BIN_DIR)
 	$(CC) $(CFLAGS) $(GTEST_FLAGS) -o $@ $< $(filter-out $(SRC_DIR)/main.cc, $(SOURCES))
 
