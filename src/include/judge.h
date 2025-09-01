@@ -1,4 +1,9 @@
+#ifndef JUDGE_H
+#define JUDGE_H
+#include "result.h"
 class Judge {
 public:
-    virtual bool evaluate(const Result& result); // 構造体の評価
+    virtual ~Judge() {}
+    virtual bool evaluate(const Result& result) = 0;
 };
+#endif

@@ -2,17 +2,19 @@
 FROM debian:bullseye-slim
 
 # 必要なパッケージをインストール
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt-get update && apt-get install -y \
     g++ \
     make \
     cmake \
     wget \
+    lcov \
     doxygen \
     graphviz \
     cppcheck \
     vim \
     python3 \
     python3-pip \
+    libtinyxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Google Test v1.8.0のインストール
