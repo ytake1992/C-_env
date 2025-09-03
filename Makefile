@@ -49,6 +49,16 @@ $(TEST_BINS): $(TEST_BIN_DIR)/%: $(TEST_DIR)/%.cc $(TEST_OBJECTS) $(HEADERS)
 	@mkdir -p $(TEST_BIN_DIR)
 	$(CC) $(CFLAGS) $(COV_FLAGS) $(GTEST_FLAGS) -o $@ $< $(TEST_OBJECTS)
 
+$(ANALYSIS_DIR)/temp_coverage/%.info: $(TEST_BIN_DIR)/%
+	@mkdir -p $(ANALYSIS_DIR)/temp_coverage
+	@chmod -R u+rw $(ANALYSIS_DIR)
+	rm -f $(OBJ_DIR)/*.gcda $(SRC_DIR)/*.gcda
+	sync
+	$< || { echo "Test $< failed"; exit 1; }
+	sync
+	lcov --capture --directory . --output-file $@ || { echo "lcov capture failed for $<"; ls -l $(OBJ_DIR)/*.gcda $(SRC_DIR)/*.gcda; exit 1; }
+	@[ -s $@ ] || { echo "Generated .info file is empty: $@"; cat $@; exit 1; }
+
 coverage: $(TEST_BINS)
 	@mkdir -p $(COVERAGE_DIR) $(ANALYSIS_DIR)/temp_coverage
     # カウンタをリセット
